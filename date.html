@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Date For You 💗</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffd6e8, #ffeef5);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 350px;
+      width: 90%;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      color: #ff4d88;
+      font-size: 28px;
+    }
+
+    p {
+      color: #555;
+      font-size: 16px;
+    }
+
+    .details {
+      margin: 20px 0;
+      font-size: 16px;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    .yes {
+      background: #ff4d88;
+      color: white;
+    }
+
+    .yes:hover {
+      background: #ff1a66;
+      transform: scale(1.1);
+    }
+
+    .no {
+      background: #ddd;
+      color: #333;
+      position: relative;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff4d88;
+      animation: float 5s infinite ease-in;
+      font-size: 20px;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id="main">
+    <h1>Will You Go On A Date With Me buddhe ? 💕</h1>
+    <p>I have a little plan for us...  kuki apne mughe bhot rulya hai to ana padega</p>
+
+    <div class="details">
+      📅 <b>Date:</b> Today, 2 November<br>
+      ⏰ <b>Time:</b> 7 PM<br>
+      📍 <b>Place:</b> Inderpuri, Pani Puri khayge babe 😋
+    </div>
+
+    <button class="yes" onclick="sayYes()">YES 💖</button>
+    <button class="no" id="noBtn" onmouseover="moveNo()">NO 🙈</button>
+  </div>
+
+  <script>
+    // Send the YES response to your email
+    async function sayYes() {
+      try {
+        const response = await fetch(
+          "https://formsubmit.co/ajax/subhigoutam85@gmail.com",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({
+              _subject: "💕 Someone accepted your date invitation!",
+              Answer: "YES 💖",
+              Message: "They clicked YES on your date invitation!",
+              Date: "2 November",
+              Time: "7 PM",
+              Place: "Inderpuri, Pani Puri"
+            })
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Email submission failed");
+        }
+
+        document.getElementById("main").innerHTML = `
+          <h1>YAYYYYY 💖🥹</h1>
+          <p>You just made me the happiest person ever! 💕</p>
+          <p>It's a date then 😘💗</p>
+        `;
+
+      } catch (error) {
+        // Still show the original success screen if email sending fails
+        document.getElementById("main").innerHTML = `
+          <h1>YAYYYYY 💖🥹</h1>
+          <p>You just made me the happiest person ever! 💕</p>
+          <p>It's a date then 😘💗</p>
+        `;
+
+        console.error("Could not submit the email:", error);
+      }
+    }
+
+    function moveNo() {
+      const btn = document.getElementById("noBtn");
+
+      btn.style.position = "absolute";
+      btn.style.left = Math.random() * 200 + "px";
+      btn.style.top = Math.random() * 200 + "px";
+    }
+
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💗";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
